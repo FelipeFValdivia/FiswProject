@@ -1,0 +1,19 @@
+<div class="todoList bg-info">
+    <h4>Perfil </h4>
+    <div class="item" ng-repeat="tarea in tareas " ng-show="$last">
+        <span class="glyphicon glyphicon-education" ng-show="$last">Nombre: {{tarea.nombre}}</span> 
+        <br>
+        <span class="glyphicon glyphicon-user" ng-show="$last">Username: {{tarea.username}}</span>
+        <br> 
+        <span class="glyphicon glyphicon-envelope" ng-show="$last">Correo: {{tarea.email}}</span>
+        <br>
+        <span class="glyphicon glyphicon-envelope" ng-show="$last">Tipo usuario: {{prioridades[tarea.prioridad]}}</span>
+        <br>
+        <div class="text-center editBtn">
+            <button class="btn btn-primary btn-sm" ng-show="$last" ng-click="encuesta()">Responder encuesta</button>
+            <button class="btn btn-success btn-sm" ng-show="$last" ng-click="cursos()">Ver cursos</button>
+            <button class="btn btn-primary btn-sm" ng-show="$last" ng-click="procesaObjeto(tarea)">Editar perfil</button>
+            <button class="btn btn-danger btn-sm" ng-show="$last" ng-click="login()">Cerrar sesión</button>
+        </div>
+    </div>
+</div>

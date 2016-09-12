@@ -1,0 +1,29 @@
+<div class="container col-md-9 col-md-offset-2">
+        <ui-view>
+<form>
+    <h3>Registro de usuario</h3>
+    <div class="has-feedback">
+        <input type="text" class="form-control" placeholder="Nombre usuario" ng-model="tarea.nombre"> </input>
+     
+    </div>
+
+    <div class="has-feedback">
+        <input type="text" class="form-control" placeholder="Ingrese username" ng-model="tarea.username"> </input>
+     
+    </div>
+
+    <div class="has-feedback">
+        <input type="password" class="form-control" placeholder="Ingrese contraseña" ng-model="tarea.password"> </input>
+     
+    </div>
+
+    <div class="has-feedback">
+        <input type="text" class="form-control" placeholder="Ingrese email" ng-model="tarea.email"> </input>
+     
+    </div>
+
+    <button type="submit" class="btn btn-success" ng-click="profesor(); perfil_profesor(tarea)">Registrar usuario</button>
+</form>
+
+</ui-view>
+</div>

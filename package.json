@@ -1,22 +1,18 @@
 {
-  "name": "fisw",
-  "version": "1.0.0",
-  "description": "Git público para trabajo de FISW",
-  "main": "index.js",
+  "name": "tareas",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FelipeFValdivia/FiswProject.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/FelipeFValdivia/FiswProject/issues"
-  },
-  "homepage": "https://github.com/FelipeFValdivia/FiswProject#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "body-parser": "~1.13.1",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "ejs": "~2.3.2",
+    "express": "~4.13.0",
+    "mongoose": "^4.0.6",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0"
   }
 }

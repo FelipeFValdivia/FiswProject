@@ -1,0 +1,206 @@
+ <div class="container col-md-9 col-md-offset-2">
+        <ui-view>
+
+    <div ng-repeat="tarea in tareas">
+    	<span class="badge" ng-show="$last">{{tarea.nombre}}</span>
+    </div>
+<form>
+    <h3>Encuesta</h3>
+
+
+    <div>
+        <span class="lead prioridad">1.Cuando aprendo...</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="0"> Me gusta vivir sensasiones
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="1"> Me gusta pensar sobre ideas
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="2"> Me gusta estar haciendo cosas
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="3"> me gusta observar y escuchar
+        </label>
+    </div>
+    <hr>
+    <div>
+        <span class="lead prioridad">2.Aprendo mejor cuando...</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="0"> escucho y observo cuidadosamente
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="1"> confio en el pensamiento lógico
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="2"> confio en mi intuición y sentimientos
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="3"> trabajo duro para lograr hacer las cosas
+        </label>
+    </div>
+    <hr>
+    <div>
+        <span class="lead prioridad">3.Cuando estoy aprendiendo...</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="0"> tiendo a usar el razonamiento
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="1"> soy responsable con lo que hago
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="2"> soy callado y reservado
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="3"> tengo fuertes sensaciones y reacciones
+        </label>
+    </div>
+    <hr>
+    <div>
+        <span class="lead prioridad">4.Yo aprendo...</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="0"> sintiendo
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="1"> haciendo
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="2"> observando
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="3"> pensando
+        </label>
+    </div>
+    <hr>
+    <div>
+        <span class="lead prioridad">5.Cuando aprendo</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="0"> estoy abierto a nuevas experiencias
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="1"> observo todos los aspectos del asunto
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="2"> me gusta analizar las cosas, descomonerlas en sus partes
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="3"> me gusta probar e intentar hacer las cosas
+        </label>
+    </div>
+    <hr>
+    <div>
+        <span class="lead prioridad">6.Cuando estoy aprendiendo...</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="0"> soy una persona observadora
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="1"> soy una persona activa
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="2"> soy una persona intuitiva
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="3"> soy una persona lógica
+        </label>    
+   	</div>
+   	<hr>
+    <div>
+        <span class="lead prioridad">7.Yo aprendo mejor de</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="0"> la observación
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="1"> la relación con otras personas
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="2"> las teorías raiconales
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="3"> la oportunidad de probar y prácticar
+        </label>
+    </div>
+    <hr>
+    <div>
+        <span class="lead prioridad">8.Cuando aprendo...</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="0"> me gusta ver los resultados de mi trabajo
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="1"> me gustan las ideas y las teorías
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="2"> me tomo mi tiempo antes de actuar
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="3"> me siento personalmente involucrado en las cosas
+        </label>
+    </div>
+    <hr>
+    <div>
+        <span class="lead prioridad">9.Aprendo mejor cuando...</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="0"> confio en mis observaciones
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="1"> confio en mis sentimientos
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="2"> puedo probar por mi cuenta
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="3"> confio en mis ideas
+        </label>
+    </div>
+    <hr>
+    <div>
+        <span class="lead prioridad">10.Cuando estoy aprendiendo...</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="0"> soy una persona reservada
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="1"> soy una persona receptiva
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="2"> soy una persona responsable
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="3"> soy una persona racional
+        </label>
+    </div>
+    <hr>
+    <div>
+        <span class="lead prioridad">11.Cuando aprendo...</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="0"> me involucro
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="1"> me gusta observar
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="2"> evalúo las cosas
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="3"> me gusta ser activo
+        </label>
+    </div>
+    <hr>
+    <div>
+        <span class="lead prioridad">12.Aprendo mejor cuando...</span>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="0"> manalizo ideas
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="1"> soy receptivo y abierto
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="2"> soy cuidadoso
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="tarea.prioridad" value="3"> soy práctico
+        </label>
+    </div>
+    <hr>
+    <div class="text-center editBtn">
+        <button class="btn btn-success btn-sm" ng-click="perfil()">Enviar encuesta</button>
+    </div>
+</form>
+<div>
+    <a ui-sref="perfil">Regresar</a>
+</div>
+</ui-view>
+    </div>
