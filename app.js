@@ -15,12 +15,12 @@ var connection = mysql.createConnection({
   password : 'admin'
 });
 
-connection.connect();
+/*connection.connect();
 
 connection.query('SELECT * FROM perros', function(err, rows, fields) {
   if (err) throw err;
   console.log('The solution is: ', rows[0].idperros);
-});
+});*/
 
 
 
