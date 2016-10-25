@@ -36,8 +36,22 @@ angular.module('appTareas', ['ui.router'])
                 url: '/perfil_profesor',
                 templateUrl: 'views/perfil_profesor.html',
                 controller: 'ctrlAlta'
+            })
+            .state('cursos', {
+                url: '/cursos',
+                templateUrl: 'views/cursos.html',
+                controller: 'ctrlAlta'
+            })
+            .state('curso', {
+                url: '/curso',
+                templateUrl: 'views/curso.html',
+                controller: 'ctrlAlta'
+            })
+            .state('perfil_tipo', {
+                url: '/perfi',
+                templateUrl: 'views/perfil_tipo.html',
+                controller: 'ctrlAlta'
             });
-
         $urlRouterProvider.otherwise('login');
     })
     .factory('comun', function() {
@@ -100,11 +114,7 @@ angular.module('appTareas', ['ui.router'])
             $scope.tarea.prioridad = '';
             $scope.tarea.email = '';
             $scope.tarea.aprendizaje = '';
-            var post  = {idperros: 3  , perroscol: 'Hello MySQL'};
-            connection.query('INSERT INTO perros SET ?', post, function(err, result) {
-              if (err) throw err;
-            });
-console.log(query.sql);
+
         }
         $scope.profesor = function() {
             $scope.tareas.push({
@@ -138,6 +148,19 @@ console.log(query.sql);
         $scope.perf = function(tarea) {
             comun.tarea = tarea;
             $state.go('perfil');
+        }
+        $scope.cursos = function(tarea) {
+            comun.tarea = tarea;
+            $state.go('cursos');
+        }
+        $scope.curso = function(tarea) {
+            comun.tarea = tarea;
+            $state.go('curso');
+        }
+        $scope.perf_tipo = function(tarea) {
+            comun.tarea = tarea;
+            alert("Felicidades tu perfil es investigador");
+            $state.go('perfil_tipo');
         }
         $scope.perfil_profesor = function(tarea) {
             comun.tarea = tarea;
