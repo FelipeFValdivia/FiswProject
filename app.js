@@ -4,17 +4,23 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var routes = require('./routes/index');
+var users = require('./routes/users');
 
+var app = express();
 
-
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  database : 'ada',
-  password : 'admin'
-});
-
+require('./models/person')
+var db = require('./db')
+db.connect(db.MODE_PRODUCTION, function(err) {
+  if (err) {
+    console.log('Unable to connect to MySQL.')
+    process.exit(1)
+  } else {
+    app.listen(3008, function() {
+      console.log('Listening on port 3000...')
+    })
+  }
+})
 /*connection.connect();
 
 connection.query('SELECT * FROM perros', function(err, rows, fields) {
@@ -25,10 +31,7 @@ connection.query('SELECT * FROM perros', function(err, rows, fields) {
 
 
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
 
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -78,4 +81,3 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
-connection.end();
