@@ -79,7 +79,7 @@ angular.module('appPersons', ['ui.router'])
         }
 
         comun.addStudent = function(person){
-            return $http.post('/person', person)
+            return $http.post('/student', person)
             .success(function(person){
                 comun.persons.push(person);
             })
@@ -96,7 +96,7 @@ angular.module('appPersons', ['ui.router'])
         $scope.prioridades = ['Alumno', 'Profesor', 'Administrador'];
 
         $scope.agregaralumno = function() {
-            comun.add({
+            comun.addStudent({
                 name: $scope.person.name,
                 age: $scope.person.age,
                 type: 2,

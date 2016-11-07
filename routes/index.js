@@ -22,7 +22,7 @@ router.get('/students', function(req,res,next){
 });
 
 router.post('/student', function(req,res,next){
-	person.create("12",23,0,0,"123","123","123",function(err, persons){
+	person.create(req.body.name,req.body.age, 0 , 0 ,req.body.email,req.body.password, req.body.nick,function(err, persons){
 		if(err){
 			return next(err);
 		}
