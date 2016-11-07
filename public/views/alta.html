@@ -3,26 +3,29 @@
 <form>
     <h3>Registro de usuario</h3>
     <div class="has-feedback">
-        <input type="text" class="form-control" placeholder="Nombre usuario" ng-model="tarea.nombre"> </input>
+        <input type="text" class="form-control" placeholder="Nombre usuario" ng-model="person.name"> </input>
      
     </div>
 
     <div class="has-feedback">
-        <input type="text" class="form-control" placeholder="Ingrese username" ng-model="tarea.username"> </input>
+        <input type="text" class="form-control" placeholder="Ingrese username" ng-model="person.nick"> </input>
+     
+    </div>
+    <div class="has-feedback">
+        <input type="text" class="form-control" placeholder="Ingrese edad" ng-model="person.age"> </input>
+     
+    </div>
+    <div class="has-feedback">
+        <input type="password" class="form-control" placeholder="Ingrese contraseña" ng-model="person.password"> </input>
      
     </div>
 
     <div class="has-feedback">
-        <input type="password" class="form-control" placeholder="Ingrese contraseña" ng-model="tarea.password"> </input>
+        <input type="text" class="form-control" placeholder="Ingrese email" ng-model="person.email"> </input>
      
     </div>
 
-    <div class="has-feedback">
-        <input type="text" class="form-control" placeholder="Ingrese email" ng-model="tarea.email"> </input>
-     
-    </div>
-
-    <button type="submit" class="btn btn-success" ng-click="agregar(); perf(tarea)">Registrar usuario</button>
+    <button type="submit" class="btn btn-success" ng-click="agregaralumno(); perf(person)">Registrar usuario</button>
 </form>
 
 </ui-view>

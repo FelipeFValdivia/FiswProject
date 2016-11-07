@@ -1,9 +1,9 @@
 
-angular.module('appTareas', ['ui.router'])
+angular.module('appPersons', ['ui.router'])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('alta', {
-                url: '/alta',
+                url: '/registrar_alumno',
                 templateUrl: 'views/alta.html',
                 controller: 'ctrlAlta'
             })
@@ -51,157 +51,178 @@ angular.module('appTareas', ['ui.router'])
                 url: '/perfi',
                 templateUrl: 'views/perfil_tipo.html',
                 controller: 'ctrlAlta'
+            })
+            .state('perfil_tipo', {
+                url: '/perfi',
+                templateUrl: 'views/perfil_tipo.html',
+                controller: 'ctrlAlta'
             });
         $urlRouterProvider.otherwise('login');
     })
-    .factory('comun', function() {
+    .factory('comun', function($http) {
         var comun = {}
 
-        comun.tareas = [{
-            nombre: 'Perico los palotes',
-            password: '12345',
-            username: 'PLP',
-            email: 'plp@correo.org',
-            prioridad: '0',
-            aprendizaje: '0'
-        }, {
-            nombre: 'Che Pinochet', 
-            password: '123456',
-            username: 'CP',
-            email: 'cp@correo.org',
-            prioridad: '1',
-            aprendizaje: '0'
-        }, {
-            nombre: 'John Osama Stalin Hitler',
-            password: '12345',
-            username: 'JOSH',
-            email: 'JOSH@correo.org',
-            prioridad: '2',
-            aprendizaje: '3'
-        }]
+        comun.persons = []
 
-        comun.tarea = {};
+        comun.person = {};
 
-        comun.eliminar = function(tarea) {
-            var indice = comun.tareas.indexOf(tarea);
-            comun.tareas.splice(indice, 1);
+        comun.eliminar = function(person) {
+            var indice = comun.persons.indexOf(person);
+            comun.persons.splice(indice, 1);
+        }
+
+        //metodos remotos
+
+        comun.getAllStudent = function(){
+
+            return $http.get('/students')
+            .succes(function(data){
+                angular.copy(data, comun.tareas)
+                comun.persons = data;
+                return comun.tareas
+            })
+        }
+
+        comun.addStudent = function(person){
+            return $http.post('/person', person)
+            .succes(function(person){
+                comun.persons.push(person);
+            })
         }
 
         return comun;
     })
     .controller('ctrlAlta', function($scope, $state, comun) {
-        $scope.tarea = {}
-            // $scope.tareas = [];
-
-        $scope.tareas = comun.tareas;
+        $scope.person = {}
+            // $scope.persons = [];
+        comun.getAllStudent();
+        $scope.persons = comun.persons;
 
         $scope.prioridades = ['Alumno', 'Profesor', 'Administrador'];
 
-
-        $scope.agregar = function() {
-            $scope.tareas.push({
-                nombre: $scope.tarea.nombre,
-                password: $scope.tarea.password,
-                username: $scope.tarea.username,
-                email: $scope.tarea.email,
-                prioridad: $scope.tarea.prioridad='0',
-                aprendizaje: $scope.tarea.aprendizaje='2'
+        $scope.agregaralumno = function() {
+            comun.add({
+                name: $scope.person.name,
+                age: $scope.person.age,
+                type: 2,
+                learning_type: 2,
+                email: $scope.person.email,
+                password: $scope.person.password,
+                nick: $scope.person.nick
             })
 
-            $scope.tarea.nombre = '';
-            $scope.tarea.password = '';
-            $scope.tarea.username = '';
-            $scope.tarea.prioridad = '';
-            $scope.tarea.email = '';
-            $scope.tarea.aprendizaje = '';
+            $scope.person.name = '';
+            $scope.person.nick = '';
+            $scope.person.password = '';
+            $scope.person.learning_type= '';
+            $scope.person.email = '';
+            $scope.person.type = '';
+
+        }
+        $scope.agregar = function() {
+            $scope.persons.push({
+                nombre: $scope.person.nombre,
+                password: $scope.person.password,
+                username: $scope.person.username,
+                email: $scope.person.email,
+                prioridad: $scope.person.prioridad='0',
+                aprendizaje: $scope.person.aprendizaje='2'
+            })
+
+            $scope.person.nombre = '';
+            $scope.person.password = '';
+            $scope.person.username = '';
+            $scope.person.prioridad = '';
+            $scope.person.email = '';
+            $scope.person.aprendizaje = '';
 
         }
         $scope.profesor = function() {
-            $scope.tareas.push({
-                nombre: $scope.tarea.nombre,
-                password: $scope.tarea.password,
-                username: $scope.tarea.username,
-                email: $scope.tarea.email,
-                prioridad: $scope.tarea.prioridad='1',
-                aprendizaje: $scope.tarea.aprendizaje='0'
+            $scope.persons.push({
+                nombre: $scope.person.nombre,
+                password: $scope.person.password,
+                username: $scope.person.username,
+                email: $scope.person.email,
+                prioridad: $scope.person.prioridad='1',
+                aprendizaje: $scope.person.aprendizaje='0'
             })
 
-            $scope.tarea.nombre = '';
-            $scope.tarea.password = '';
-            $scope.tarea.username = '';
-            $scope.tarea.prioridad = '';
-            $scope.tarea.email = '';
-            $scope.tarea.aprendizaje = '';
+            $scope.person.nombre = '';
+            $scope.person.password = '';
+            $scope.person.username = '';
+            $scope.person.prioridad = '';
+            $scope.person.email = '';
+            $scope.person.aprendizaje = '';
         }
-        $scope.prof_ini = function(tarea) {
+        $scope.prof_ini = function(person) {
             $state.go('registrar_profesor');
         }
 
-        $scope.eliminar = function(tarea) {
-            comun.eliminar(tarea)
+        $scope.eliminar = function(person) {
+            comun.eliminar(person)
         }
 
-        $scope.procesaObjeto = function(tarea) {
-            comun.tarea = tarea;
+        $scope.procesaObjeto = function(person) {
+            comun.person = person;
             $state.go('editar');
         }
-        $scope.perf = function(tarea) {
-            comun.tarea = tarea;
+        $scope.perf = function(person) {
+            comun.person = person;
             $state.go('perfil');
         }
-        $scope.cursos = function(tarea) {
-            comun.tarea = tarea;
+        $scope.cursos = function(person) {
+            comun.person = person;
             $state.go('cursos');
         }
-        $scope.curso = function(tarea) {
-            comun.tarea = tarea;
+        $scope.curso = function(person) {
+            comun.person = person;
             $state.go('curso');
         }
-        $scope.perf_tipo = function(tarea) {
-            comun.tarea = tarea;
+        $scope.perf_tipo = function(person) {
+            comun.person = person;
             alert("Felicidades tu perfil es investigador");
             $state.go('perfil_tipo');
         }
-        $scope.perfil_profesor = function(tarea) {
-            comun.tarea = tarea;
+        $scope.perfil_profesor = function(person) {
+            comun.person = person;
             $state.go('perfil_profesor');
         }
-        $scope.encuesta = function(tarea){
-            comun.tarea = tarea;
+        $scope.encuesta = function(person){
+            comun.person = person;
             $state.go('encuesta');
         }
-        $scope.ini_ses = function(tarea){
+        $scope.ini_ses = function(person){
             $state.go('alta');
         }
-        $scope.sesion = function(tarea) {
-            $scope.tareas.push({
-                nombre: $scope.tarea.nombre,
-                password: $scope.tarea.password,
-                username: $scope.tarea.username= 'username',
-                email: $scope.tarea.email='correo@correo.com',
-                prioridad: $scope.tarea.prioridad='0',
-                aprendizaje: $scope.tarea.aprendizaje='2'
+        $scope.sesion = function(person) {
+            $scope.persons.push({
+                nombre: $scope.person.nombre,
+                password: $scope.person.password,
+                username: $scope.person.username= 'username',
+                email: $scope.person.email='correo@correo.com',
+                prioridad: $scope.person.prioridad='0',
+                aprendizaje: $scope.person.aprendizaje='2'
             })
 
-            $scope.tarea.nombre = '';
-            $scope.tarea.password = '';
-            $scope.tarea.username = '';
-            $scope.tarea.prioridad = '';
-            $scope.tarea.email = '';
-            $scope.tarea.aprendizaje = '';
+            $scope.person.nombre = '';
+            $scope.person.password = '';
+            $scope.person.username = '';
+            $scope.person.prioridad = '';
+            $scope.person.email = '';
+            $scope.person.aprendizaje = '';
         }
     })
     .controller('ctrlEditar', function($scope, $state, comun) {
-        $scope.tarea = comun.tarea;
+        $scope.person = comun.person;
         
         $scope.actualizar = function() {
-            var indice = comun.tareas.indexOf(comun.tarea);
-            comun.tareas[indice] = $scope.tarea;
+            var indice = comun.persons.indexOf(comun.person);
+            comun.persons[indice] = $scope.person;
             $state.go('perfil');
         }
 
         $scope.eliminar = function(){
-            comun.eliminar($scope.tarea);
+            comun.eliminar($scope.person);
             $state.go('login');
         }
     })
