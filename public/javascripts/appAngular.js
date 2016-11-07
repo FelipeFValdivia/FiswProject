@@ -51,11 +51,6 @@ angular.module('appPersons', ['ui.router'])
                 url: '/perfi',
                 templateUrl: 'views/perfil_tipo.html',
                 controller: 'ctrlAlta'
-            })
-            .state('perfil_tipo', {
-                url: '/perfi',
-                templateUrl: 'views/perfil_tipo.html',
-                controller: 'ctrlAlta'
             });
         $urlRouterProvider.otherwise('login');
     })
@@ -76,16 +71,16 @@ angular.module('appPersons', ['ui.router'])
         comun.getAllStudent = function(){
 
             return $http.get('/students')
-            .succes(function(data){
-                angular.copy(data, comun.tareas)
+            .success(function(data){
+                angular.copy(data, comun.persons)
                 comun.persons = data;
-                return comun.tareas
+                return comun.persons
             })
         }
 
         comun.addStudent = function(person){
             return $http.post('/person', person)
-            .succes(function(person){
+            .success(function(person){
                 comun.persons.push(person);
             })
         }
@@ -214,7 +209,7 @@ angular.module('appPersons', ['ui.router'])
     })
     .controller('ctrlEditar', function($scope, $state, comun) {
         $scope.person = comun.person;
-        
+
         $scope.actualizar = function() {
             var indice = comun.persons.indexOf(comun.person);
             comun.persons[indice] = $scope.person;

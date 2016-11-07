@@ -16,7 +16,7 @@ db.connect(db.MODE_PRODUCTION, function(err) {
     console.log('Unable to connect to MySQL.')
     process.exit(1)
   } else {
-    app.listen(3008, function() {
+    app.listen(3000, function() {
       console.log('Listening on port 3000...')
     })
   }
@@ -27,10 +27,6 @@ connection.query('SELECT * FROM perros', function(err, rows, fields) {
   if (err) throw err;
   console.log('The solution is: ', rows[0].idperros);
 });*/
-
-
-
-
 
 
 // view engine setup
