@@ -84,7 +84,10 @@ angular.module('appPersons', ['ui.router'])
                 comun.persons.push(person);
             })
         }
+        comun.login = function(person){
+            return $http.post('/login', person)
 
+        }
         return comun;
     })
     .controller('ctrlAlta', function($scope, $state, comun) {
@@ -100,7 +103,7 @@ angular.module('appPersons', ['ui.router'])
                 name: $scope.person.name,
                 age: $scope.person.age,
                 type: 2,
-                learning_type: 2,
+                learning_type: 0,
                 email: $scope.person.email,
                 password: $scope.person.password,
                 nick: $scope.person.nick
@@ -112,6 +115,17 @@ angular.module('appPersons', ['ui.router'])
             $scope.person.learning_type= '';
             $scope.person.email = '';
             $scope.person.type = '';
+
+        }
+        $scope.login = function(){
+            var response = comun.login({
+                nick: $scope.person.nick,
+                password: $scope.person.password
+                })
+            console.log("hola felipe")
+            console.log(response.$$state)
+                
+            $state.go('perfil');
 
         }
         $scope.agregar = function() {

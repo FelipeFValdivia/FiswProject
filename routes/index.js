@@ -21,8 +21,34 @@ router.get('/students', function(req,res,next){
 	})
 });
 
+router.post('/login', function(req,res,next){
+	person.login(req.body.nick,function(err, persons){
+
+		if(err){
+			return next(err);
+		}
+		if (persons.length>0){
+			if(persons[0].password == req.body.password){
+				res.json(persons);
+			}
+			else{
+				res.json("wrong password");	
+			}	
+		}
+
+		else {
+			res.json(null);
+		}
+		
+		
+
+
+	})
+});
+
+
 router.post('/student', function(req,res,next){
-	person.create(req.body.name,req.body.age, 0 , 0 ,req.body.email,req.body.password, req.body.nick,function(err, persons){
+	person.create(req.body.name,req.body.age, 2 , 0 ,req.body.email,req.body.password, req.body.nick,function(err, persons){
 		if(err){
 			return next(err);
 		}

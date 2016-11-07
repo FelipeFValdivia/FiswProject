@@ -4,12 +4,12 @@
 <form>
     <h3>Inicio de sesión</h3>
     <div class="has-feedback">
-        <input type="text" class="form-control" placeholder="Username" ng-model="tarea.nombre"> </input>     
+        <input type="text" class="form-control" placeholder="Username" ng-model="person.nick"> </input>     
     </div>
     <div class="has-feedback">
-        <input type="password" class="form-control" placeholder="Ingrese contraseña" ng-model="tarea.password"> </input>
+        <input type="password" class="form-control" placeholder="Ingrese contraseña" ng-model="person.password"> </input>
     </div>
-    <button type="submit" class="btn btn-success" ng-click="sesion(); perf()">Iniciar sesión</button>
+    <button type="submit" class="btn btn-success" ng-click="login()">Iniciar sesión</button>
 </form>
 
 <button type="submit" class="btn btn-primary regist" ng-click="ini_ses()">Registrar alumno</button>
