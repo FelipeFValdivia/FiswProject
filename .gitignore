@@ -1,2 +1,3 @@
 .DS_Storex
 npm-debug.log*
+node_modules/*

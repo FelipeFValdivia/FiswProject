@@ -86,6 +86,7 @@ angular.module('appPersons', ['ui.router'])
         }
         comun.login = function(person){
             return $http.post('/login', person)
+ 
 
         }
         return comun;
@@ -118,14 +119,29 @@ angular.module('appPersons', ['ui.router'])
 
         }
         $scope.login = function(){
-            var response = comun.login({
+            comun.login({
                 nick: $scope.person.nick,
                 password: $scope.person.password
                 })
-            console.log("hola felipe")
-            console.log(response.$$state)
+                .then(function(respons){
+                    if (respons.data == null){
+                        alert("Ingrese un usuario valido");
+                        $state.go('login');
+                    }
+                    else{
+                        if (respons.data == "wrong password"){
+                            alert("Password incorrecto");
+                            $state.go('login');
+                        }
+                        else{
+                            $state.go('perfil');
+                        }
+
+                    }
+    
+                })
+
                 
-            $state.go('perfil');
 
         }
         $scope.agregar = function() {
