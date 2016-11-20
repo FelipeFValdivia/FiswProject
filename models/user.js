@@ -16,7 +16,6 @@ exports.update_user = function(name, birthdate,type,learning_type,email,password
     done(null, result)
   })
 }
-//Actualizar la fecha de nacimiento de un usuario
 
 //Obtener todos los usuarios
 exports.getAllUsers = function(done) {

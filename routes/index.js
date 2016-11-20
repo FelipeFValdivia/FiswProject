@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../db.js');
 var user = require('../models/user');
 var course = require('../models/course');
-
+var chapter = require('../models/chapter')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -182,5 +182,80 @@ router.delete('/courses/:course_id', function(req,res,next){
 		res.json(users);
 	})
 });
+
+//obtener los capitulos de un curso
+router.get('/courses/:course_id/chapters', function(req,res,next){
+	chapter.get_chapters_from_course(req.params.course_id,function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+
+	})
+});
+
+//Create a chapter for a course
+router.post('courses/:course_id/chapters', function(req,res,next){
+	chapter.create_chapter(req.body.name,req.body.description, req.params.course_id, req.body.number ,function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(req.body);
+
+	})
+});
+
+
+//____________________________________________________________________________________________________________________________
+/*
+							Chapters routes
+*/
+
+//Get all chapters
+router.get('/chapters', function(req,res,next){
+	chapter.getAllChapters(function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+
+	})
+});
+
+
+
+//Show a chapter
+router.get('/chapters/:chapter_id', function(req,res,next){
+	chapter.get_chapter(req.params.chapter_id,function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+
+	})
+});
+
+
+//Actualiza un curso
+router.put('/chapters/:chapter_id', function(req,res,next){
+	chapter.update_chapter(req.body.name,req.body.description, req.body.course_id , req.params.chapter_id,function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(req.body);
+
+	})
+});
+
+//eliminar un curso
+router.delete('/chapters/:chapter_id', function(req,res,next){
+	chapter.delete_chapter(req.params.chapter_id, function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+	})
+});
+
 
 module.exports = router;
