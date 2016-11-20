@@ -9,15 +9,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-
-
 router.get('/students', function(req,res,next){
 	person.getAllStudent(function(err, persons){
 		if(err){
 			return next(err);
 		}
 		res.json(persons);
-
 	})
 });
 
@@ -32,15 +29,15 @@ router.post('/login', function(req,res,next){
 				res.json(persons);
 			}
 			else{
-				res.json("wrong password");	
-			}	
+				res.json("wrong password");
+			}
 		}
 
 		else {
 			res.json(null);
 		}
-		
-		
+
+
 
 
 	})
