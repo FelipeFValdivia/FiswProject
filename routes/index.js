@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../db.js');
 var user = require('../models/user');
+var course = require('../models/course');
 
 
 /* GET home page. */
@@ -123,7 +124,63 @@ router.delete('/users/:user_id', function(req,res,next){
 });
 
 //____________________________________________________________________________________________________________________________
+/*
+							Courses routes
+*/
+
+//Get all courses
+router.get('/courses', function(req,res,next){
+	course.getAllCourses(function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+
+	})
+});
+
+//Create a course
+router.post('/courses', function(req,res,next){
+	course.create_course(req.body.name,req.body.description, req.body.short_name ,function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(req.body);
+
+	})
+});
+
+//Show a course
+router.get('/courses/:course_id', function(req,res,next){
+	course.get_course(req.params.course_id,function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+
+	})
+});
 
 
+//Actualiza un curso
+router.put('/courses/:course_id', function(req,res,next){
+	course.update_course(req.body.name,req.body.description, req.body.short_name , req.params.course_id,function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(req.body);
+
+	})
+});
+
+//eliminar un curso
+router.delete('/courses/:course_id', function(req,res,next){
+	course.delete_course(req.params.course_id, function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+	})
+});
 
 module.exports = router;
