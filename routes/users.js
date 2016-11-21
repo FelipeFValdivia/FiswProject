@@ -20,30 +20,3 @@ router.post("/users", function(req, res){
     DELETE: deletes user by id
 */
 
-app.get("/users/:id", function(req, res) {
-});
-
-app.put("/users/:id", function(req, res) {
-});
-
-app.delete("/users/:id", function(req, res) {
-});
-
-
-
-/*
-/* GET users listing.
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-router.get('/students', function(req,res,next){
-	person.getAllStudent(function(err, persons){
-		if(err){
-			return next(err);
-		}
-		res.json(persons);
-
-	})
-});
-module.exports = router;
-*/
