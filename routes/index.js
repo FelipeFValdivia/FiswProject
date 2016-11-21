@@ -3,8 +3,8 @@ var router = express.Router();
 var db = require('../db.js');
 var user = require('../models/user');
 var course = require('../models/course');
-var chapter = require('../models/chapter')
-
+var chapter = require('../models/chapter');
+var content = require('../models/content');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -123,6 +123,39 @@ router.delete('/users/:user_id', function(req,res,next){
 	})
 });
 
+//Obtener todos los cursos de un usuario
+router.get('/users/:user_id/courses', function(req,res,next){
+	user.get_courses_for_user(req.params.user_id, function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+
+	})
+});
+
+// Crear relación usuario curso
+router.post('/user_course', function(req,res,next){
+	user.enroll_course(req.body.c_person_id,req.body.p_course_id,function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(req.body);
+
+	})
+});
+
+//eliminar relación curso usuario
+router.delete('/users/:user_id/courses/:course_id', function(req,res,next){
+	user.delete_course_user(req.params.user_id, req.params.course_id, function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+	})
+});
+
+
 //____________________________________________________________________________________________________________________________
 /*
 							Courses routes
@@ -236,9 +269,9 @@ router.get('/chapters/:chapter_id', function(req,res,next){
 });
 
 
-//Actualiza un curso
+//Actualiza un capitulo
 router.put('/chapters/:chapter_id', function(req,res,next){
-	chapter.update_chapter(req.body.name,req.body.description, req.body.course_id , req.params.chapter_id,function(err, users){
+	chapter.update_chapter(req.body.name,req.body.description, req.params.chapter_id,function(err, users){
 		if(err){
 			return next(err);
 		}
@@ -247,7 +280,7 @@ router.put('/chapters/:chapter_id', function(req,res,next){
 	})
 });
 
-//eliminar un curso
+//eliminar un capitulo
 router.delete('/chapters/:chapter_id', function(req,res,next){
 	chapter.delete_chapter(req.params.chapter_id, function(err, users){
 		if(err){
@@ -256,6 +289,83 @@ router.delete('/chapters/:chapter_id', function(req,res,next){
 		res.json(users);
 	})
 });
+
+//obtener los contenidos de un capitulo
+router.get('/chapters/:chapter_id/contents', function(req,res,next){
+	content.get_contents_from_chapter(req.params.chapter_id,function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+
+	})
+});
+
+//Crear un contenido para un capitulo
+router.post('/chapters/:chapter_id/contents', function(req,res,next){
+	content.create_content(req.body.name,req.body.type, req.body.content ,req.params.chapter_id ,function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(req.body);
+
+	})
+});
+
+
+
+
+//____________________________________________________________________________________________________________________________
+/*
+							Contents routes
+*/
+
+//Get all contents
+router.get('/contents', function(req,res,next){
+	content.getAllcontents(function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+
+	})
+});
+
+
+
+//Show a content
+router.get('/contents/:content_id', function(req,res,next){
+	content.get_content(req.params.content_id,function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+
+	})
+});
+
+
+//Actualiza un contenido
+router.put('/contents/:content_id', function(req,res,next){
+	content.update_content(req.body.name,req.body.type, req.body.content , req.params.content_id,function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(req.body);
+
+	})
+});
+
+//eliminar un contenido
+router.delete('/contents/:content_id', function(req,res,next){
+	content.delete_content(req.params.content_id, function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+	})
+});
+
 
 
 module.exports = router;

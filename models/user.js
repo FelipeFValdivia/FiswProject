@@ -72,6 +72,32 @@ exports.login = function(name,done) {
   })
 }
 
+
+//get all courses for a user
+exports.get_courses_for_user = function(user_id,done) {
+  value = user_id
+  db.get().query('SELECT c.id_course, c.name, c.description, c.short_name FROM courses as c INNER JOIN course_person AS cp ON (c.id_course = cp.p_course_id) WHERE cp.c_person_id =  ?', value, function (err, rows) {
+    if (err) return done(err)
+    done(null, rows)
+  })
+}
+
+//enrol course for a user
+exports.enroll_course = function(user_id, course_id , done) {
+  var values = [user_id, course_id]
+  db.get().query('INSERT INTO course_person (c_person_id, p_course_id) VALUES(?, ?)', values, function(err, result) {
+    if (err) return done(err)
+    done(null, result)
+  })
+}
+
+exports.delete_course_user = function(user_id,course_id ,done) {
+  value = [user_id, course_id]
+  db.get().query('DELETE FROM course_person WHERE c_person_id =  ? AND p_course_id =?', value, function (err, rows) {
+    if (err) return done(err)
+    done(null, rows)
+  })
+}
 // exports.getAllByUser = function(userId, done) {
 //   db.get().query('SELECT * FROM users WHERE user_id = ?', userId, function (err, rows) {
 //     if (err) return done(err)

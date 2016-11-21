@@ -1,6 +1,8 @@
 <div class="container col-md-9 col-md-offset-2">
         <ui-view>
+        <script src="src/js/angular-datepicker.js"></script> 
 <form>
+
     <h3>Registro de usuario</h3>
     <div class="has-feedback">
         <input type="text" class="form-control" placeholder="Nombre usuario" ng-model="person.name"> </input>
@@ -14,6 +16,9 @@
     <div class="has-feedback">
         <input type="text" class="form-control" placeholder="Ingrese edad" ng-model="person.age"> </input>
      
+    </div>
+    <div flex-gt-xs>
+        <input ng-model="date" type="text"/>
     </div>
     <div class="has-feedback">
         <input type="password" class="form-control" placeholder="Ingrese contraseña" ng-model="person.password"> </input>

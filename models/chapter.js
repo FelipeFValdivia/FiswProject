@@ -8,16 +8,16 @@ exports.create_chapter = function(name, description,course_id,number, done) {
   })
 }
 //Actualizar el nombre de un capitulo
-exports.update_chapter = function(name, description,course_id,number , chapter_id, done) {
-  var values = [name, description,course_id,number,chapter_id]
-  db.get().query('UPDATE chapters SET name = ?, description = ?, course_id = ?, number = ? WHERE id_chapter = ?', values, function(err, result) {
+exports.update_chapter = function(name, description,number , chapter_id, done) {
+  var values = [name, description,number,chapter_id]
+  db.get().query('UPDATE chapters SET name = ?, description = ?, number = ? WHERE id_chapter = ?', values, function(err, result) {
     if (err) return done(err)
     done(null, result)
   })
 }
 
 //Obtener todos los capitulos
-exports.getAllchapters = function(done) {
+exports.getAllChapters = function(done) {
   db.get().query('SELECT * FROM chapters ', function (err, rows) {
     if (err) return done(err)
     done(null, rows)
