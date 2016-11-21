@@ -332,7 +332,6 @@ router.get('/contents', function(req,res,next){
 });
 
 
-
 //Show a content
 router.get('/contents/:content_id', function(req,res,next){
 	content.get_content(req.params.content_id,function(err, users){
