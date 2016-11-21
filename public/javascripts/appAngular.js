@@ -109,7 +109,6 @@ angular.module('appPersons', ['ui.router'])
                 password: $scope.person.password,
                 nick: $scope.person.nick
             })
-
             $scope.person.name = '';
             $scope.person.nick = '';
             $scope.person.password = '';

@@ -9,7 +9,7 @@ var users = require('./routes/users');
 
 var app = express();
 
-require('./models/person')
+require('./models/user')
 var db = require('./db')
 db.connect(db.MODE_PRODUCTION, function(err) {
   if (err) {
