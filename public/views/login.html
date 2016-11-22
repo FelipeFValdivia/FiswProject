@@ -1,19 +1,17 @@
 <ui-view>
-<div class="container col-md-4 col-md-offset-4">
+	<div class="container col-md-4 col-md-offset-4">
 
-<form>
-    <h3>Inicio de sesión</h3>
-    <div class="has-feedback">
-        <input type="text" class="form-control" placeholder="Username" ng-model="person.nick"> </input>     
-    </div>
-    <div class="has-feedback">
-        <input type="password" class="form-control" placeholder="Ingrese contraseña" ng-model="person.password"> </input>
-    </div>
-    <button type="submit" class="btn btn-success" ng-click="login()">Iniciar sesión</button>
-</form>
+		<form>
+		    <h3>Inicio de sesión</h3>
+		    <div class="has-feedback">
+		        <input type="text" class="form-control" placeholder="Username" ng-model="person.nick"> </input>     
+		    </div>
+		    <div class="has-feedback">
+		        <input type="password" class="form-control" placeholder="Ingrese contraseña" ng-model="person.password"> </input>
+		    </div>
+		    <button type="submit" class="btn btn-success" ng-click="login()">Iniciar sesión</button>
+		</form>
 
-<button type="submit" class="btn btn-primary regist" ng-click="ini_ses()">Registrar alumno</button>
-<!--<button type="submit" class="btn btn-primary regist" ng-click="prof_ini()">Registrar profesor</button>
-</div>-->
-
+		<button type="submit" class="btn btn-primary regist" ng-click="ini_ses()">Registrar alumno</button>
+	</div>
 </ui-view>
