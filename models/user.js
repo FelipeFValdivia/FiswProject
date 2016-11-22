@@ -1,17 +1,17 @@
 
 var db = require('../db.js');
 //Crear un usuario
-exports.create = function(name, birthdate,type,learning_type,email,password,nick , done) {
-  var values = [name,birthdate,type,learning_type,email,password,nick]
-  db.get().query('INSERT INTO users (name,birthdate,type,learning_type,email,password,nick) VALUES(?, ?, ?, ?, ?,?,?)', values, function(err, result) {
+exports.create = function(name, birthdate,type,learning_type,email,password, done) {
+  var values = [name,birthdate,type,learning_type,email,password]
+  db.get().query('INSERT INTO users (name,birthdate,type,learning_type,email,password) VALUES(?, ?, ?, ?,?,?)', values, function(err, result) {
     if (err) return done(err)
     done(null, result)
   })
 }
 //Actualizar el nombre de un usuario
-exports.update_user = function(name, birthdate,type,learning_type,email,password,nick , user_id, done) {
-  var values = [name,birthdate,type,learning_type,email,password,nick,user_id]
-  db.get().query('UPDATE users SET name = ?, birthdate = ?, type = ?, learning_type = ?, email = ?, password = ?, nick = ? WHERE id_person = ?', values, function(err, result) {
+exports.update_user = function(name, birthdate,type,learning_type,email,password, user_id, done) {
+  var values = [name,birthdate,type,learning_type,email,password,user_id]
+  db.get().query('UPDATE users SET name = ?, birthdate = ?, type = ?, learning_type = ?, email = ?, password = ? WHERE id_person = ?', values, function(err, result) {
     if (err) return done(err)
     done(null, result)
   })
@@ -66,7 +66,7 @@ exports.delete_user = function(user_id ,done) {
 
 exports.login = function(name,done) {
 	var value = name;
-  db.get().query('SELECT * FROM users WHERE nick = ?',value, function (err, rows) {
+  db.get().query('SELECT * FROM users WHERE email = ?',value, function (err, rows) {
     if (err) return done(err)
     done(null, rows)
   })

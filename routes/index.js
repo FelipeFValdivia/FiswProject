@@ -58,8 +58,9 @@ router.get('/students', function(req,res,next){
 	})
 });
 
+//Logea un usuario
 router.post('/login', function(req,res,next){
-	user.login(req.body.nick,function(err, users){
+	user.login(req.body.email,function(err, users){
 
 		if(err){
 			return next(err);
@@ -69,20 +70,20 @@ router.post('/login', function(req,res,next){
 				res.json(users);
 			}
 			else{
-				res.json("wrong password");	
-			}	
+				res.json("wrong password");
+			}
 		}
 
 		else {
 			res.json(null);
 		}
-		
+
 	})
 });
 
 //Crea un usuario
 router.post('/users', function(req,res,next){
-	user.create(req.body.name,req.body.birthdate, req.body.type , req.body.learning_type ,req.body.email,req.body.password, req.body.nick,function(err, users){
+	user.create(req.body.name,req.body.birthdate, req.body.type , req.body.learning_type ,req.body.email,req.body.password, function(err, users){
 		if(err){
 			return next(err);
 		}
@@ -93,7 +94,7 @@ router.post('/users', function(req,res,next){
 
 //Actualiza un usuario
 router.put('/users/:user_id', function(req,res,next){
-	user.update_user(req.body.name,req.body.birthdate, req.body.type , req.body.learning_type ,req.body.email,req.body.password, req.body.nick, req.params.user_id,function(err, users){
+	user.update_user(req.body.name,req.body.birthdate, req.body.type , req.body.learning_type ,req.body.email,req.body.password,  req.params.user_id,function(err, users){
 		if(err){
 			return next(err);
 		}

@@ -2,9 +2,9 @@
 angular.module('appPersons', ['ui.router'])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('alta', {
+            .state('registrar_alumno', {
                 url: '/registrar_alumno',
-                templateUrl: 'views/alta.html',
+                templateUrl: 'views/registrar_alumno.html',
                 controller: 'ctrlAlta'
             })
             .state('editar', {
@@ -79,14 +79,14 @@ angular.module('appPersons', ['ui.router'])
         }
 
         comun.addStudent = function(person){
-            return $http.post('/student', person)
+            return $http.post('/users', person)
             .success(function(person){
                 comun.persons.push(person);
             })
         }
         comun.login = function(person){
             return $http.post('/login', person)
- 
+
 
         }
         return comun;
@@ -100,17 +100,16 @@ angular.module('appPersons', ['ui.router'])
         $scope.prioridades = ['Alumno', 'Profesor', 'Administrador'];
 
         $scope.agregaralumno = function() {
+          console.log($scope.person.birthdate);
             comun.addStudent({
                 name: $scope.person.name,
-                age: $scope.person.age,
+                birthdate: $scope.person.birthdate,
                 type: 2,
                 learning_type: 0,
                 email: $scope.person.email,
-                password: $scope.person.password,
-                nick: $scope.person.nick
+                password: $scope.person.password
             })
             $scope.person.name = '';
-            $scope.person.nick = '';
             $scope.person.password = '';
             $scope.person.learning_type= '';
             $scope.person.email = '';
@@ -119,7 +118,7 @@ angular.module('appPersons', ['ui.router'])
         }
         $scope.login = function(){
             comun.login({
-                nick: $scope.person.nick,
+                email: $scope.person.email,
                 password: $scope.person.password
                 })
                 .then(function(respons){
@@ -137,10 +136,10 @@ angular.module('appPersons', ['ui.router'])
                         }
 
                     }
-    
+
                 })
 
-                
+
 
         }
         $scope.agregar = function() {
@@ -216,7 +215,7 @@ angular.module('appPersons', ['ui.router'])
             $state.go('encuesta');
         }
         $scope.ini_ses = function(person){
-            $state.go('alta');
+            $state.go('registrar_alumno');
         }
         $scope.sesion = function(person) {
             $scope.persons.push({
@@ -250,3 +249,21 @@ angular.module('appPersons', ['ui.router'])
             $state.go('login');
         }
     })
+    .controller('AppCtrl', function($scope) {
+  $scope.myDate = new Date();
+
+  $scope.minDate = new Date(
+      $scope.myDate.getFullYear(),
+      $scope.myDate.getMonth() - 2,
+      $scope.myDate.getDate());
+
+  $scope.maxDate = new Date(
+      $scope.myDate.getFullYear(),
+      $scope.myDate.getMonth() + 2,
+      $scope.myDate.getDate());
+
+  $scope.onlyWeekendsPredicate = function(date) {
+    var day = date.getDay();
+    return day === 0 || day === 6;
+  };
+});
