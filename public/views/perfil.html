@@ -1,19 +1,38 @@
-<div class="todoList bg-info">
-    <h4>Perfil </h4>
-    <div class="item" ng-repeat="person in persons " ng-show="$last">
-        <span class="glyphicon glyphicon-education" ng-show="$last">Nombre: {{person.name}}</span> 
+   
+<div class="card">
+    <br>
+    <div class="alert alert-danger" ng-show="person.learning_type == 0 && person.type == 2">Recuerda responder la encuesta, así podrás aprovecharnos al máximo!</div>
+
+    <div class="card-header">
+        <center>
+            <img src="https://s-media-cache-ak0.pinimg.com/originals/3b/f0/77/3bf0775b0d234545d14a5941be966ab2.jpg" class="img-circle"/>
+        </center>
+    </div>
+    <div class="card-content">
+        <h3>{{person.name}}</h3>   
+        <br> 
+        <h4>{{person.email}}</h4>
+        <h4>Tu tipo de usuario es {{prioridades[person.type]}}</h4>
+        <h4 ng-show="$last"></h4>
+        <h4 ng-show="person.learning_type == 1">Tu tipo de aprendizaje es divergente</h4>
+        <h4 ng-show="person.learning_type == 2">Tu tipo de aprendizaje es adaptador</h4>
+        <h4 ng-show="person.learning_type == 3">Tu tipo de aprendizaje es convergente</h4>
+        <h4 ng-show="person.learning_type == 4">Tu tipo de aprendizaje es asmilador</h4>
         <br>
-        <span class="glyphicon glyphicon-envelope" ng-show="$last">Correo: {{person.email}}</span>
+        <p ng-show="person.learning_type == 1"> El estilo de aprendizaje divergente enfatiza la observación reflexiva, la mayor fuerza de esta orientación yace en la habilidad imaginativa y el conocimiento de significados y valores.  </p>
+        <p ng-show="person.learning_type == 2">El estilo de aprendizaje adaptador enfatiza mayormente la experiencia concreta la mayor fuerza de esta orientación, recae en el hecho de hacer cosas </p>
+        <p ng-show="person.learning_type == 3">El estilo de aprendizaje convergente depende principalmente de habilidades de aprendizaje predominantes de experimentación activa, la mayor fuerza de esta propuesta yace en resolver problemas, tomar decisiones y en la aplicación práctica de ideas. </p>
+        <p ng-show="person.learning_type == 4"> En el estilo asimilador las habilidades que predominan son conceptualizacionesa bstractas, la mayor fuerza en esta orientación cae en el razonamiento inductivo y en la habilidad para crear modelos teóricos.</p>
+    </div>
+    <div class="text-center editBtn">
+        <button class="btn btn-primary btn-sm" ng-show="person.learning_type == 0 && person.type == 2" ng-click="encuesta(person)">Responder encuesta</button>
+        <button class="btn btn-primary btn-sm" ng-show="person.type == 0" ng-click="reg_prof()">Registrar un profesor</button>
+        <button class="btn btn-success btn-sm" ng-show="person.type != 0" ng-click="cursos_usuario(person)">Ver tus cursos</button>
+        <button class="btn btn-primary btn-sm"  ng-click="procesaObjeto(person)">Editar perfil</button>
+        <button class="btn btn-success btn-sm" ng-show="person.type != 1"  ng-click="cursos(person)">Ver todos los cursos</button>
         <br>
-        <span class="glyphicon glyphicon-envelope" ng-show="$last">Tipo usuario: {{prioridades[person.prioridad]}}</span>
-        <br>
-        <span class="glyphicon glyphicon-envelope" ng-show="$last">Tipo aprendizaje: debes responder la encuesta</span>
-        <br>
-        <div class="text-center editBtn">
-            <button class="btn btn-primary btn-sm" ng-show="$last" ng-click="encuesta()">Responder encuesta</button>
-            <button class="btn btn-success btn-sm" ng-show="$last" ng-click="cursos()">Ver cursos</button>
-            <button class="btn btn-primary btn-sm" ng-show="$last" ng-click="procesaObjeto(person)">Editar perfil</button>
-            <button class="btn btn-danger btn-sm" ng-show="$last" ng-click="login()">Cerrar sesión</button>
-        </div>
+        <button class="btn btn-danger btn-sm" ng-show="$last" ng-click="cerrar_sesion()">Cerrar sesión</button>
     </div>
 </div>
+
+

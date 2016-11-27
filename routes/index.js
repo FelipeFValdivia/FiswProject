@@ -67,7 +67,7 @@ router.post('/login', function(req,res,next){
 		}
 		if (users.length>0){
 			if(users[0].password == req.body.password){
-				res.json(users);
+				res.json(users[0]);
 			}
 			else{
 				res.json("wrong password");

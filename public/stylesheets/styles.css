@@ -1,11 +1,22 @@
 body {
-    padding-top: 50px;
+    padding-top: 10px;
 }
 .names{
 
 }
+.todoList h1{
+    color: #6D7993;
+}
+.todoList button{
+    width: 60%;
+}
+
+#exampleSelect1{
+    width: 40px;
+
+}
 .container {
-    background-color: #f2f2f2;
+    background-color: #eeeeee;
     border: 1px solid #ccc;
     padding: 20px;
     top: 20px;
@@ -36,7 +47,7 @@ button {
     border: 1px solid LightBlue;
     border-radius: 5px;
     padding: 10px;
-    color: #000000;
+    color: #000000
 }
 
 .glyphicon-circle-arrow-up,
@@ -56,7 +67,6 @@ button {
 }
 
 .item {
-    text-transform: capitalize;
     border-bottom: 1px solid SteelBlue;
     margin-top: 10px;
     padding-left: 5px;
@@ -81,4 +91,152 @@ button {
 .item.ng-move.ng-move-active,
 .item.ng-enter.ng-enter-active {
     opacity: 1;
+}
+
+.courses-class button{
+    width: 75%;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans);
+
+body {
+  background-color: #0000;
+}
+
+
+.header-content h1{
+    color: #6D7993;
+    margin-top: 0px;
+}
+.card {
+  background-color: #f4f4f4;
+  width: 80%;
+  height: 150%;
+  margin: 10px auto;
+  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.7);
+}
+
+.card-header {
+  overflow: hidden;
+  width: 95%;
+  max-height: 50%;
+}
+
+.card-header img{
+  width: 150px;
+  height: 150px;
+}
+
+.card-content {
+  width: 85%;
+  margin: 35px auto;
+}
+
+.card-content h3 {
+  font-size: 25px;
+  margin-bottom: 0;
+  color: #303F9F;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card-content h4 {
+  font-size: 20px;
+  margin-top: 0;
+  color: #5cb85c;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card-content p {
+  color: #727272;
+  font-size: 15px;
+  font-family: 'Open Sans', sans-serif;
+  
+}
+
+.card-footer {
+  border-top: solid 1px #B6B6B6;
+  padding: 5px;
+}
+
+.card-footer ul {
+  padding: 0;
+  width: 90%;
+  margin: auto;
+  text-align: center;
+}
+
+.card-footer ul li{
+  display: inline-block;
+  list-style: none;
+  margin: 5px;
+}
+
+.card-footer ul li i {
+  font-size: 2em;
+  color: #3F51B5;
+}
+
+
+/**
+ * For the correct positioning of the placeholder element, the dnd-list and
+ * it's children must have position: relative
+ */
+.simpleDemo ul[dnd-list],
+.simpleDemo ul[dnd-list] > li {
+    position: relative;
+}
+
+/**
+ * The dnd-list should always have a min-height,
+ * otherwise you can't drop to it once it's empty
+ */
+.simpleDemo ul[dnd-list] {
+    min-height: 42px;
+    padding-left: 0px;
+}
+
+/**
+ * The dndDraggingSource class will be applied to
+ * the source element of a drag operation. It makes
+ * sense to hide it to give the user the feeling
+ * that he's actually moving it.
+ */
+.simpleDemo ul[dnd-list] .dndDraggingSource {
+    display: none;
+}
+
+/**
+ * An element with .dndPlaceholder class will be
+ * added to the dnd-list while the user is dragging
+ * over it.
+ */
+.simpleDemo ul[dnd-list] .dndPlaceholder {
+    display: block;
+    background-color: #ddd;
+    min-height: 42px;
+}
+
+/**
+ * The dnd-lists's child elements currently MUST have
+ * position: relative. Otherwise we can not determine
+ * whether the mouse pointer is in the upper or lower
+ * half of the element we are dragging over. In other
+ * browsers we can use event.offsetY for this.
+ */
+.simpleDemo ul[dnd-list] li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+}
+
+/**
+ * Show selected elements in green
+ */
+.simpleDemo ul[dnd-list] li.selected {
+    background-color: #dff0d8;
+    color: #3c763d;
 }

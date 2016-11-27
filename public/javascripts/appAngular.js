@@ -10,7 +10,7 @@ angular.module('appPersons', ['ui.router'])
             .state('editar', {
                 url: '/editar',
                 templateUrl: 'views/editar.html',
-                controller: 'ctrlEditar'
+                controller: 'ctrlAlta'
             })
             .state('encuesta', {
                 url:'/encuesta',
@@ -42,9 +42,39 @@ angular.module('appPersons', ['ui.router'])
                 templateUrl: 'views/cursos.html',
                 controller: 'ctrlAlta'
             })
+            .state('cursos_usuario', {
+                url: '/tus_cursos',
+                templateUrl: 'views/cursos_usuario.html',
+                controller: 'ctrlAlta'
+            })
             .state('curso', {
                 url: '/curso',
                 templateUrl: 'views/curso.html',
+                controller: 'ctrlAlta'
+            })
+            .state('asimilador', {
+                url: '/asimilador',
+                templateUrl: 'views/asimilador.html',
+                controller: 'ctrlAlta'
+            })
+            .state('convergente', {
+                url: '/convergente',
+                templateUrl: 'views/convergente.html',
+                controller: 'ctrlAlta'
+            })
+            .state('adaptador', {
+                url: '/adaptador',
+                templateUrl: 'views/adaptador.html',
+                controller: 'ctrlAlta'
+            })
+            .state('divergente', {
+                url: '/divergente',
+                templateUrl: 'views/divergente.html',
+                controller: 'ctrlAlta'
+            })
+            .state('defecto', {
+                url: '/defecto',
+                templateUrl: 'views/defecto.html',
                 controller: 'ctrlAlta'
             })
             .state('perfil_tipo', {
@@ -57,9 +87,14 @@ angular.module('appPersons', ['ui.router'])
     .factory('comun', function($http) {
         var comun = {}
 
-        comun.persons = []
-
+        comun.persons = [];
+        comun.courses = [];
+        comun.user_courses = [];
+        comun.chapters = [];
+        comun.course = {};
+        comun.chapter = {};
         comun.person = {};
+        comun.contents = [];
 
         comun.eliminar = function(person) {
             var indice = comun.persons.indexOf(person);
@@ -67,7 +102,22 @@ angular.module('appPersons', ['ui.router'])
         }
 
         //metodos remotos
-
+        comun.getAllCourses = function(){
+            return $http.get('/courses')
+            .success(function(data){
+                angular.copy(data, comun.courses)
+                comun.courses = data;
+                return comun.courses
+            })
+        }
+        comun.updateStudent = function(user_id,user){
+            return $http.put('/users/'+user_id, user)
+            .success(function(data){
+                angular.copy(data, comun.persons)
+                comun.persons = data;
+                return comun.persons
+            })            
+        }
         comun.getAllStudent = function(){
 
             return $http.get('/students')
@@ -77,30 +127,74 @@ angular.module('appPersons', ['ui.router'])
                 return comun.persons
             })
         }
+        comun.getAllContentForChapter = function(content_id){
+            console.log('/chapters/'+content_id+'/contents')
+            return $http.get('/chapters/'+content_id+'/contents')
+            .success(function(data){
+                angular.copy(data, comun.contents)
+                comun.contents = data;
+                return comun.contents
+            })
+        }
+        comun.getCoursesForUser = function(user_id){
+            return $http.get('/users/'+user_id+'/courses')
+            .success(function(data){
+                angular.copy(data, comun.user_courses)
+                comun.user_courses = data;
+
+                return comun.user_courses
+
+            })
+        }
+
+        comun.getChaptersForCourse = function(course_id){
+            return $http.get('/courses/'+course_id+'/chapters')
+            .success(function(data){
+                angular.copy(data, comun.chapters)
+                comun.chapters = data;
+                return comun.chapters
+            })
+        }
+        comun.getCourse = function(course_id){
+            return $http.get('/courses/'+course_id)
+            .success(function(data){
+                comun.course = data;
+                return comun.course
+            })
+        }
 
         comun.addStudent = function(person){
             return $http.post('/users', person)
             .success(function(person){
-                comun.persons.push(person);
+                if (person.type == 2)
+                    comun.persons.push(person);
             })
         }
         comun.login = function(person){
             return $http.post('/login', person)
 
-
         }
+
+        comun.addCourseToStudent = function(req){
+            return $http.post('/user_course', req)
+        }
+
         return comun;
     })
     .controller('ctrlAlta', function($scope, $state, comun) {
-        $scope.person = {}
+      
+        $scope.user_courses = comun.user_courses;
+        $scope.chapters = comun.chapters;
+        $scope.chapter = comun.chapter;
+        $scope.contents =comun.contents;
             // $scope.persons = [];
-        comun.getAllStudent();
+        $scope.person = comun.person;
         $scope.persons = comun.persons;
+        $scope.courses = comun.courses;
+        $scope.course = comun.course;
+        $scope.prioridades = [ 'Administrador', 'Profesor','Alumno'];
 
-        $scope.prioridades = ['Alumno', 'Profesor', 'Administrador'];
-
-        $scope.agregaralumno = function() {
-          console.log($scope.person.birthdate);
+         $scope.agregaralumno = function() {
             comun.addStudent({
                 name: $scope.person.name,
                 birthdate: $scope.person.birthdate,
@@ -109,13 +203,38 @@ angular.module('appPersons', ['ui.router'])
                 email: $scope.person.email,
                 password: $scope.person.password
             })
+            .then(function(respons){
+                $scope.person.email = respons.data.email
+                $scope.person.password = respons.data.password
+                alert("Tu perfil ha sido creado con éxito, felicidades.")
+                $scope.login($scope.person)
+            })
+
             $scope.person.name = '';
             $scope.person.password = '';
             $scope.person.learning_type= '';
             $scope.person.email = '';
             $scope.person.type = '';
 
-        }
+        }       
+         $scope.agregarprofesor = function() {
+            comun.addStudent({
+                name: $scope.person.name,
+                birthdate: $scope.person.birthdate,
+                type: 1,
+                learning_type: 0,
+                email: $scope.person.email,
+                password: $scope.person.password
+            })
+            alert("Profesor agregado con éxito");
+
+            $scope.person.name = '';
+            $scope.person.password = '';
+            $scope.person.learning_type= '';
+            $scope.person.email = '';
+            $scope.person.type = '';
+            $state.go('perfil')
+        }       
         $scope.login = function(){
             comun.login({
                 email: $scope.person.email,
@@ -123,7 +242,7 @@ angular.module('appPersons', ['ui.router'])
                 })
                 .then(function(respons){
                     if (respons.data == null){
-                        alert("Ingrese un usuario valido");
+                        alert("Ingrese un correo valido");
                         $state.go('login');
                     }
                     else{
@@ -132,7 +251,7 @@ angular.module('appPersons', ['ui.router'])
                             $state.go('login');
                         }
                         else{
-                            $state.go('perfil');
+                            $scope.perf(respons.data);
                         }
 
                     }
@@ -190,17 +309,109 @@ angular.module('appPersons', ['ui.router'])
             $state.go('editar');
         }
         $scope.perf = function(person) {
-            comun.person = person;
+            comun.person = person
             $state.go('perfil');
         }
+        $scope.cursos_usuario = function(person){
+            comun.getCoursesForUser(person.id_person)
+            .then(function(respons){
+                $scope.user_courses = respons.data;
+                $state.go('cursos_usuario');
+            })
+        }
         $scope.cursos = function(person) {
-            comun.person = person;
+            
+            comun.getAllCourses()
+            .then(function(respons){
+                $scope.courses = respons.data;
+
+            })
             $state.go('cursos');
+            
         }
-        $scope.curso = function(person) {
-            comun.person = person;
-            $state.go('curso');
+        $scope.inscribir_curso = function(course, person){
+            comun.addCourseToStudent({
+                c_person_id: person.id_person,
+                p_course_id: course.id_course
+            })
+            $scope.perf(person)
+
         }
+        $scope.curso = function(curso) {
+            comun.getChaptersForCourse(curso.id_course)
+            .then(function(respons){
+                $scope.chapters = respons.data;
+
+            })
+            comun.getCourse(curso.id_course)
+            .then(function(respons){
+                comun.course = respons.data[0];
+            })
+            $state.go('curso');    
+        }
+        $scope.contenido = function(person, capitulo) {
+            if (person.learning_type == 4){
+                comun.getAllContentForChapter(capitulo.id_chapter)
+                .then(function(respons){
+                    $scope.contents = respons.data;
+                })
+                $state.go('asimilador');
+            }
+            if (person.learning_type == 3){
+                comun.getAllContentForChapter(capitulo.id_chapter)
+                .then(function(respons){
+                    $scope.contents = respons.data;
+                })
+                $state.go('convergente');
+            }
+            if (person.learning_type == 2){
+                comun.getAllContentForChapter(capitulo.id_chapter)
+                .then(function(respons){
+                    $scope.contents = respons.data;
+                })
+                $state.go('adaptador');
+            }
+            if (person.learning_type == 1){
+                comun.getAllContentForChapter(capitulo.id_chapter)
+                .then(function(respons){
+                    $scope.contents = respons.data;
+                })
+                $state.go('divergente');
+            }
+            if (person.learning_type == 0){
+                comun.getAllContentForChapter(capitulo.id_chapter)
+                .then(function(respons){
+                    $scope.contents = respons.data;
+                })
+                $state.go('defecto');
+            }
+        }
+        $scope.desinscribir_curso = function(course){
+            
+
+        }
+        $scope.calcular_estilo = function(person){
+            person.learning_type = 4
+            alert("Tu estilo es asimilador");
+            comun.updateStudent(person.id_person, person)
+            $state.go('perfil')
+
+        }
+        $scope.cerrar_sesion = function(person) {
+            alert("Has cerrado sesión");
+            $state.go('login');
+        }
+
+        $scope.delete_user = function(person)  {
+            var resp = confirm("Estás seguro de que deseas eliminar tu cuenta?")
+            if (resp==true){
+                $state.go('login')
+            }
+            else {
+                $state.go('editar')
+            }
+        }      
+
         $scope.perf_tipo = function(person) {
             comun.person = person;
             alert("Felicidades tu perfil es investigador");
@@ -211,11 +422,13 @@ angular.module('appPersons', ['ui.router'])
             $state.go('perfil_profesor');
         }
         $scope.encuesta = function(person){
-            comun.person = person;
             $state.go('encuesta');
         }
         $scope.ini_ses = function(person){
             $state.go('registrar_alumno');
+        }
+        $scope.reg_prof= function(person){
+            $state.go('registrar_profesor');
         }
         $scope.sesion = function(person) {
             $scope.persons.push({
@@ -248,22 +461,4 @@ angular.module('appPersons', ['ui.router'])
             comun.eliminar($scope.person);
             $state.go('login');
         }
-    })
-    .controller('AppCtrl', function($scope) {
-  $scope.myDate = new Date();
-
-  $scope.minDate = new Date(
-      $scope.myDate.getFullYear(),
-      $scope.myDate.getMonth() - 2,
-      $scope.myDate.getDate());
-
-  $scope.maxDate = new Date(
-      $scope.myDate.getFullYear(),
-      $scope.myDate.getMonth() + 2,
-      $scope.myDate.getDate());
-
-  $scope.onlyWeekendsPredicate = function(date) {
-    var day = date.getDay();
-    return day === 0 || day === 6;
-  };
-});
+    });
