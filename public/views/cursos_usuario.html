@@ -1,0 +1,13 @@
+<div class="todoList bg-info" ng-controller="ctrlAlta" id="courses">
+    <h1>Cursos </h1>
+        <center>
+        	
+            <h2 ng-show= "user_courses.length == 0"> Aún no estás inscrito en un curso </h2>
+            <div class="item" ng-repeat="course in user_courses"  >
+                <button type="submit" class="btn .btn-primary" ng-click="curso(course)">{{course.name}}  </button>
+            </div>
+        </center> 
+    <div>
+        <a ui-sref="perfil">Regresar</a>
+    </div>
+</div>
