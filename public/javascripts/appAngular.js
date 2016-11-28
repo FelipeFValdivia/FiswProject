@@ -32,6 +32,11 @@ angular.module('appPersons', ['ui.router'])
                 templateUrl: 'views/registrar_profesor.html',
                 controller: 'ctrlAlta'
             })
+            .state('asignar_profesor', {
+                url: '/asignar_profesor',
+                templateUrl: 'views/asignar_profesor.html',
+                controller: 'ctrlAlta'
+            })
             .state('perfil_profesor', {
                 url: '/perfil_profesor',
                 templateUrl: 'views/perfil_profesor.html',
@@ -70,6 +75,11 @@ angular.module('appPersons', ['ui.router'])
             .state('divergente', {
                 url: '/divergente',
                 templateUrl: 'views/divergente.html',
+                controller: 'ctrlAlta'
+            })
+            .state('curso_admin', {
+                url: '/curso_admin',
+                templateUrl: 'views/curso_admin.html',
                 controller: 'ctrlAlta'
             })
             .state('defecto', {
@@ -320,12 +330,12 @@ angular.module('appPersons', ['ui.router'])
             comun.eliminar(person)
         }
 
+
         $scope.procesaObjeto = function(person) {
             comun.person = person;
             $state.go('editar');
         }
         $scope.perf = function(person) {
-            comun.person = person
             $state.go('perfil');
         }
         $scope.cursos_usuario = function(person){
@@ -352,6 +362,13 @@ angular.module('appPersons', ['ui.router'])
             $scope.perf(person)
 
         }
+        $scope.asign_prof = function() {
+            comun.addCourseToStudent({
+                c_person_id: $scope.person.id,
+                p_course_id: $scope.course.id
+            })
+            $state.go('perfil')            
+        }
         $scope.curso = function(curso) {
             comun.getChaptersForCourse(curso.id_course)
             .then(function(respons){
@@ -363,6 +380,20 @@ angular.module('appPersons', ['ui.router'])
                 comun.course = respons.data[0];
             })
             $state.go('curso');    
+        }
+        $scope.asignar_profesor = function(course, profesor) {
+            $state.go('asignar_profesor')
+
+        }
+        $scope.curso_admin = function(course) {
+            comun.course = course;
+            comun.getChaptersForCourse(course.id_course)
+            .then(function(respons){
+                $scope.chapters = respons.data;
+
+            })
+            $state.go('curso_admin')
+
         }
         $scope.contenido = function(person, capitulo) {
             console.log(person)
@@ -432,10 +463,6 @@ angular.module('appPersons', ['ui.router'])
             comun.person = person;
             alert("Felicidades tu perfil es investigador");
             $state.go('perfil_tipo');
-        }
-        $scope.perfil_profesor = function(person) {
-            comun.person = person;
-            $state.go('perfil_profesor');
         }
         $scope.encuesta = function(person){
             $state.go('encuesta');

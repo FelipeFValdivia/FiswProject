@@ -1,0 +1,31 @@
+<div class="container col-md-9 col-md-offset-2">
+  <ui-view>
+    <script src="src/js/angular-datepicker.js"></script>
+    <form class="form-horizontal" role="form">
+      <h2>Crear Curso</h2>
+      <div class="form-group">
+        <label for="firstName" class="col-sm-3 control-label">id del curso</label>
+        <div class="col-sm-9">
+          <input type="text" id="firstName" placeholder="Id del curso" class="form-control" ng-model="course.id" autofocus>
+          <!--<span class="help-block">Last Name, First Name, eg.: Smith, Harry</span>-->
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email" class="col-sm-3 control-label">id del profesor</label>
+        <div class="col-sm-9">
+          <input type="textarea" id="email" placeholder="Id del profesor" class="form-control" ng-model="person.id">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+          <button type="submit" class="btn btn-primary btn-block" ng-click="asign_prof()">Crear curso</button>
+        </div>
+      </div>
+
+
+    </form> <!-- /form -->
+
+
+
+  </ui-view>
+</div>

@@ -1,0 +1,17 @@
+<div class="todoList bg-info" ng-controller="ctrlAlta" id="courses">
+    <h1>Cursos </h1>
+    <center>
+        <h1> {{course.name}} </h1>
+    </center> 
+    <div class="item" ng-repeat="capitulo in chapters ">
+        <center>
+            <button type="submit" class="btn btn-success btn-sm" ng-click="contenido(person, capitulo)" >{{capitulo.name}}</button>
+        </center>
+    </div>
+    <center>
+        <button type="submit" class="btn btn-success btn-sm" ng-click="asignar_profesor(person, capitulo)" >Asignar profesor al curso</button>
+    </center>
+    <div>
+        <a ui-sref="perfil">Regresar</a>
+    </div>
+</div>
