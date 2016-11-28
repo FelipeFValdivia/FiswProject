@@ -336,6 +336,7 @@ angular.module('appPersons', ['ui.router'])
             $state.go('editar');
         }
         $scope.perf = function(person) {
+            comun.person = person
             $state.go('perfil');
         }
         $scope.cursos_usuario = function(person){
