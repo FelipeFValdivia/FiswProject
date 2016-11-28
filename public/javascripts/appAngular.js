@@ -77,6 +77,11 @@ angular.module('appPersons', ['ui.router'])
                 templateUrl: 'views/defecto.html',
                 controller: 'ctrlAlta'
             })
+            .state('crear_curso', {
+                url: '/crear_curso',
+                templateUrl: 'views/crear_curso.html',
+                controller: 'ctrlAlta'
+            })            
             .state('perfil_tipo', {
                 url: '/perfi',
                 templateUrl: 'views/perfil_tipo.html',
@@ -96,10 +101,6 @@ angular.module('appPersons', ['ui.router'])
         comun.person = {};
         comun.contents = [];
 
-        comun.eliminar = function(person) {
-            var indice = comun.persons.indexOf(person);
-            comun.persons.splice(indice, 1);
-        }
 
         //metodos remotos
         comun.getAllCourses = function(){
@@ -170,6 +171,9 @@ angular.module('appPersons', ['ui.router'])
                     comun.persons.push(person);
             })
         }
+        comun.addCourse = function(course){
+            return $http.post('/courses', course)
+        }
         comun.login = function(person){
             return $http.post('/login', person)
 
@@ -216,8 +220,20 @@ angular.module('appPersons', ['ui.router'])
             $scope.person.email = '';
             $scope.person.type = '';
 
-        }       
-         $scope.agregarprofesor = function() {
+        }  
+        $scope.crear_curso = function(){
+            comun.addCourse({
+                name: $scope.course.name,
+                description: $scope.course.description,
+                short_name: $scope.course.short_name
+            })
+            $state.go('perfil')
+
+        }
+        $scope.course_create = function() {
+            $state.go('crear_curso')
+        }
+        $scope.agregarprofesor = function() {
             comun.addStudent({
                 name: $scope.person.name,
                 birthdate: $scope.person.birthdate,
@@ -319,8 +335,7 @@ angular.module('appPersons', ['ui.router'])
                 $state.go('cursos_usuario');
             })
         }
-        $scope.cursos = function(person) {
-            
+        $scope.cursos = function(person) {       
             comun.getAllCourses()
             .then(function(respons){
                 $scope.courses = respons.data;
@@ -350,6 +365,7 @@ angular.module('appPersons', ['ui.router'])
             $state.go('curso');    
         }
         $scope.contenido = function(person, capitulo) {
+            console.log(person)
             if (person.learning_type == 4){
                 comun.getAllContentForChapter(capitulo.id_chapter)
                 .then(function(respons){
@@ -387,7 +403,7 @@ angular.module('appPersons', ['ui.router'])
             }
         }
         $scope.desinscribir_curso = function(course){
-            
+
 
         }
         $scope.calcular_estilo = function(person){

@@ -1,0 +1,22 @@
+<div class="todoList bg-info">
+	    <div class="item" ng-repeat="contenido in contents ">
+	        <center>
+	        	{{contenido.name}}
+	        	<div ng-if = "contenido.type == 'vídeo'">
+	        		<iframe width="560" height="315" src="https://www.youtube.com/embed/cFaf1_P2Y8c" frameborder="0" allowfullscreen ></iframe>
+	        	</div>
+	        	<div ng-if = "contenido.type == 'imagen'">
+	        		<img src="http://www.endesaeduca.com/Endesa_educa/imagenes/Electro_encabezado.jpg" alt="Mountain View" style="width:304px;height:228px;">
+	        	</div>
+
+	        </center>
+
+
+	    </div>
+    </div>
+
+    
+    <a ui-sref="perfil">Regresar</a>
+</div>
+
+</div>

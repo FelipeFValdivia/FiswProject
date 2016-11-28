@@ -1,4 +1,4 @@
-   
+
 <div class="card">
     <br>
     <div class="alert alert-danger" ng-show="person.learning_type == 0 && person.type == 2">Recuerda responder la encuesta, así podrás aprovecharnos al máximo!</div>
@@ -31,7 +31,7 @@
         <button class="btn btn-primary btn-sm"  ng-click="procesaObjeto(person)">Editar perfil</button>
         <button class="btn btn-success btn-sm" ng-show="person.type != 1"  ng-click="cursos(person)">Ver todos los cursos</button>
         <br>
-        <button class="btn btn-danger btn-sm" ng-show="$last" ng-click="cerrar_sesion()">Cerrar sesión</button>
+        <button class="btn btn-danger btn-sm" ng-click="cerrar_sesion()">Cerrar sesión</button>
     </div>
 </div>
 

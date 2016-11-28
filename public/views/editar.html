@@ -1,20 +1,19 @@
 <div class="container col-md-9 col-md-offset-2">
     <ui-view>
     <form>
-    <h3>Edita tu perfil</h3>
-    <div class="has-feedback">
-        <input type="text" class="form-control" placeholder="Nombre" ng-model="person.name" value="{{person.nombre}}"> </input>
+        <h3>Edita tu perfil</h3>
+        <div class="has-feedback">
+            <input type="text" class="form-control" placeholder="Nombre" ng-model="person.name" value="{{person.nombre}}"> </input>
 
-        <input type="text" class="form-control" placeholder="Email" ng-model="person.email" value="{{person.email}}"> </input>
-        <input type="password" class="form-control" placeholder="Contraseña" ng-model="person.password" value="{{person.password}}"> </input>
+            <input type="text" class="form-control" placeholder="Email" ng-model="person.email" value="{{person.email}}"> </input>
+            <input type="password" class="form-control" placeholder="Contraseña" ng-model="person.password" value="{{person.password}}"> </input>
+        </div>
+        <div class="text-center editBtn">
+            <button class="btn btn-success btn-sm" ng-click="actualizar()">Actualizar</button>
+        </div>
+    </form>
+    <div>
+        <a ui-sref="perfil">Regresar</a>
     </div>
-    <div class="text-center editBtn">
-        <button class="btn btn-success btn-sm" ng-click="actualizar()">Actualizar</button>
-        <button class="btn btn-danger btn-sm" ng-click="delete_user()">Eliminar</button>
-    </div>
-</form>
-<div>
-    <a ui-sref="perfil">Regresar</a>
-</div>
-</ui-view>
+    </ui-view>
 </div>

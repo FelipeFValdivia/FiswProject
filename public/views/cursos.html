@@ -1,12 +1,13 @@
 <div class="todoList bg-info" ng-controller="ctrlAlta" id="courses">
     <h1>Cursos </h1>
-        <center>
-                <div class="item courses-class" ng-repeat="course in courses"  >
-                    <h1> {{course.name}} </h1> 
-                    <button type="submit" class="btn .btn-primary" ng-click="inscribir_curso(course, person)" ng-show="person.type == 2"> Inscibirse en el curso </button>
-                    <button type="submit" class="btn .btn-primary" ng-click="course(course)" ng-show="person.type == 0"> Revisar el curso </button>
-                </div>
-        </center> 
+    <center>
+        <div class="item courses-class" ng-repeat="course in courses"  >
+            <h1> {{course.name}} </h1> 
+            <button type="submit" class="btn btn-primary" ng-click="inscribir_curso(course, person)" ng-show="person.type == 2"> Inscibirse en el curso </button>
+            <button type="submit" class="btn btn-primary" ng-click="course(course)" ng-show="person.type == 0"> Revisar el curso </button>
+        </div>
+    </center> 
+    <button type="submit" class="btn btn-primary" ng-click="course_create(person)" ng-show="person.type == 0"> Ingresar un nuevo curso </button>    
     <div>
         <a ui-sref="perfil">Regresar</a>
     </div>

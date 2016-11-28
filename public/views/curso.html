@@ -1,13 +1,12 @@
 <div class="todoList bg-info">
-    <h1 >{{course.name}} </h1>
-        <div class="item" ng-repeat="capitulo in chapters ">
-            <center>
+    <h1 >{{course.name}}  </h1>
+    <div class="item" ng-repeat="capitulo in chapters ">
+        <center>
         	
-                <button type="submit" class="btn btn-success btn-sm" ng-click="contenido(person, capitulo)" >{{capitulo.name}}</button>
+            <button type="submit" class="btn btn-success btn-sm" ng-click="contenido(person, capitulo)" >{{capitulo.name}}</button>
 
         	
-            </center>
-        </div>
-    <button class="btn btn-danger btn-sm" ng-click="desinscribir_curso(course)">Desincribir curso</button>
+        </center>
+    </div>
     <a ui-sref="cursos_usuario">Regresar</a>
 </div>
